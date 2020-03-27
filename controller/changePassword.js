@@ -14,18 +14,18 @@ async function resetPassword(req, res, next) {
             const p = req.body.newPassword;
             let hashedPassword = passwordHash.generate(p);
             user.update({ password: hashedPassword })
-            res.status(200).json({
+            res.status(201).json({
                 message: "password changed successfully"
             })
         }
         else {
-            res.status(404).json({
+            res.status(401).json({
                 message: "old password incorrect"
             })
         }
     }
     catch (err) {
-        res.status(401).json(
+        res.status(404).json(
             {
                 message:"username doesn't exists"
             }

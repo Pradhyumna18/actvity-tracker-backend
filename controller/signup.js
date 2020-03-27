@@ -13,7 +13,7 @@ async function SignUp(req, res, next) {
             let hashedPassword = passwordHash.generate(p);
             req.body.password = hashedPassword;
             const user = await models.Users.create(req.body);
-            res.status(200).json(
+            res.status(201).json(
                 {user,
                 data}
             );

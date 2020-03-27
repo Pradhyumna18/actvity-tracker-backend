@@ -6,12 +6,14 @@ async function addActivity(req, res, next) {
         const payload = jwt.decode(token)
         const obj = { ...req.body, userId: payload.userId }
         const act = await models.Activities.create(obj)
-        res.status(200).json({
+        res.status(201).json({
             act
         })
     }
     catch (err) {
-        next(err)
+        res.status(400).json({
+         message:"could not add"
+        })
     }
 }
 module.exports = addActivity;
