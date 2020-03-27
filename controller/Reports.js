@@ -20,7 +20,7 @@ async function showActivities(req, res, next) {
         for (i = 0; i < 7; i++) {
             let sum = 0;
             let obj = [];
-            let c=0;
+            let c = 0;
 
             const data = await models.Activities.findAll({
                 where: {
@@ -31,14 +31,13 @@ async function showActivities(req, res, next) {
             obj = [...JSON.parse(JSON.stringify(data, null, 4))]
             if (obj.length !== 0) {
                 obj.map(act => {
-                    if (act.endTime !== null)
-                    {
+                    if (act.endTime !== null) {
                         c++
                         sum = sum + moment(act.endTime, "HH:mm:ss").diff(moment(act.startTime, "HH:mm:ss"))
                     }
                 })
                 info = {
-                    date: prevDates[i], count: c, duration: sum
+                    date: prevDates[i], count: c, duration: sum/60000+" minutes"
                 }
                 output.push(info)
                 console.log(obj.length)
